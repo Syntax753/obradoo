@@ -47,8 +47,8 @@ func _input(event: InputEvent) -> void:
 	# Tab is bound to ui_focus_next by default and would be consumed before
 	# _unhandled_input fires — handle it here so the casebook always opens.
 	if event is InputEventKey and event.pressed and not event.echo and event.keycode == KEY_TAB:
-		_open_casebook()
 		get_viewport().set_input_as_handled()
+		_open_casebook()
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed and not event.echo:

@@ -255,7 +255,7 @@ func _draw_portrait(node: Control, actor_id: String) -> void:
 	node.draw_string(font, Vector2(center.x - ts.x / 2.0, center.y + fs / 3.0), label_text, HORIZONTAL_ALIGNMENT_LEFT, -1, fs, Color("181210"))
 
 func _on_dropdown_changed(idx: int, actor_id: String, field: String, dropdown: OptionButton) -> void:
-	var value := "" if idx == 0 else dropdown.get_item_text(idx)
+	var value: String = "" if idx == 0 else dropdown.get_item_text(idx)
 	if field == "name":
 		GameState.set_actor_guess(actor_id, value)
 	else:
