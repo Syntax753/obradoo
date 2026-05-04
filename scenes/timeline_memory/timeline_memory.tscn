@@ -24,9 +24,9 @@ offset_right = -16.0
 offset_bottom = 56.0
 theme_override_constants/separation = 12
 
-[node name="MenuButton" type="Button" parent="Top"]
-custom_minimum_size = Vector2(120, 36)
-text = "Menu"
+[node name="BackButton" type="Button" parent="Top"]
+custom_minimum_size = Vector2(140, 36)
+text = "← Manor"
 
 [node name="Spacer" type="Control" parent="Top"]
 size_flags_horizontal = 3
@@ -73,7 +73,7 @@ theme_override_font_sizes/font_size = 14
 theme_override_colors/font_color = Color(0.6, 0.56, 0.48, 1)
 
 [node name="Hint" type="Label" parent="HBox/Right/Header"]
-text = "← / →  step    ·    click actor to inspect"
+text = "← / →  step    ·    hover actor for tooltip    ·    click to pin inspect    ·    Tab opens casebook    ·    Esc back to manor"
 theme_override_font_sizes/font_size = 11
 theme_override_colors/font_color = Color(0.5, 0.46, 0.4, 1)
 
@@ -92,7 +92,7 @@ fit_content = true
 scroll_active = true
 
 [node name="InspectPanel" type="PanelContainer" parent="HBox/Right"]
-custom_minimum_size = Vector2(0, 170)
+custom_minimum_size = Vector2(0, 200)
 
 [node name="Margin" type="MarginContainer" parent="HBox/Right/InspectPanel"]
 theme_override_constants/margin_left = 16

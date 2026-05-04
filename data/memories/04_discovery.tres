@@ -9,4 +9,6 @@ order = 4
 title = "Discovery"
 subtitle = "A few minutes before midnight"
 intro = "The host falls. Four others move — or fail to. Who runs to help. Who freezes. Who quietly leaves the room."
-scene_path = "res://scenes/memories/placeholder_memory.tscn"
+scene_path = "res://scenes/timeline_memory/timeline_memory.tscn"
+timeline_id = "discovery"
+world_position = Vector2i(10, 6)

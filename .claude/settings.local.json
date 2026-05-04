@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(& \"C:/Users/synt_/dev/obradoo/tools/test.ps1\")",
+      "PowerShell($out = & \"C:/Users/synt_/dev/obradoo/tools/test.ps1\" 2>&1 | Out-String; Write-Output $out; Write-Output \"EXIT: $LASTEXITCODE\")",
+      "PowerShell(& \"C:/Users/synt_/dev/obradoo/tools/test.ps1\"; Write-Output \"EXIT: $LASTEXITCODE\")",
+      "PowerShell($godot = \"$env:LOCALAPPDATA\\\\Programs\\\\Godot\\\\Godot_v4.6.2-stable_win64.exe\"; & $godot --headless --path . --script res://tools/check_grid.gd 2>&1)",
+      "PowerShell($godot = \"$env:LOCALAPPDATA\\\\Programs\\\\Godot\\\\Godot_v4.6.2-stable_win64.exe\"; $out = & $godot --headless --path . --script res://tools/check_grid.gd 2>&1 | Out-String; $out)"
+    ]
+  }
+}

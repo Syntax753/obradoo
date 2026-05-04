@@ -6,15 +6,6 @@ extends Control
 
 func _ready() -> void:
 	continue_btn.disabled = not GameState.has_save()
-	new_btn.pressed.connect(_on_new_game)
-	continue_btn.pressed.connect(_on_continue)
-	quit_btn.pressed.connect(_on_quit)
-
-func _on_new_game() -> void:
-	GameState.start_new_game()
-
-func _on_continue() -> void:
-	GameState.continue_game()
-
-func _on_quit() -> void:
-	get_tree().quit()
+	new_btn.pressed.connect(GameState.start_new_game)
+	continue_btn.pressed.connect(GameState.continue_game)
+	quit_btn.pressed.connect(get_tree().quit)

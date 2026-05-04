@@ -11,3 +11,4 @@ subtitle = "The dining room — a long table, two decanters, five glasses"
 intro = "Wine is poured. A vintage is requested. One guest declines too quickly. Watch the hands. Watch the glass."
 scene_path = "res://scenes/timeline_memory/timeline_memory.tscn"
 timeline_id = "toast"
+world_position = Vector2i(17, 4)

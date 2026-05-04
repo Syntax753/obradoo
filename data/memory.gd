@@ -8,3 +8,4 @@ extends Resource
 @export_multiline var intro: String = ""
 @export_file("*.tscn") var scene_path: String = ""
 @export var timeline_id: String = ""
+@export var world_position: Vector2i = Vector2i.ZERO

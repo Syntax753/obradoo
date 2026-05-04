@@ -1,0 +1,94 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://scenes/world/manor_3d.gd" id="1"]
+[ext_resource type="Shader" path="res://scenes/world/dither.gdshader" id="2"]
+
+[sub_resource type="ShaderMaterial" id="DitherMaterial"]
+shader = ExtResource("2")
+
+[sub_resource type="StyleBoxFlat" id="LabelBg"]
+bg_color = Color(0, 0, 0, 0.72)
+content_margin_left = 8.0
+content_margin_top = 4.0
+content_margin_right = 8.0
+content_margin_bottom = 4.0
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[node name="Manor3D" type="Node"]
+script = ExtResource("1")
+
+[node name="ViewportLayer" type="CanvasLayer" parent="."]
+layer = -10
+
+[node name="Viewport" type="SubViewportContainer" parent="ViewportLayer"]
+material = SubResource("DitherMaterial")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="ViewportLayer/Viewport"]
+handle_input_locally = false
+size = Vector2i(640, 360)
+render_target_update_mode = 4
+
+[node name="World" type="Node3D" parent="ViewportLayer/Viewport/SubViewport"]
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="LocationLabel" type="Label" parent="UI"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -200.0
+offset_top = 12.0
+offset_right = 200.0
+offset_bottom = 40.0
+horizontal_alignment = 1
+text = "Ravensreach Manor"
+theme_override_font_sizes/font_size = 16
+theme_override_colors/font_color = Color(0.95, 0.92, 0.84, 1)
+theme_override_styles/normal = SubResource("LabelBg")
+
+[node name="MenuButton" type="Button" parent="UI"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -120.0
+offset_top = 12.0
+offset_right = -16.0
+offset_bottom = 44.0
+text = "Menu"
+
+[node name="HintLabel" type="Label" parent="UI"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = -56.0
+offset_right = 760.0
+offset_bottom = -16.0
+text = "WASD/arrows to move.   Mouse to look.   Space to recall.   Tab opens the casebook.   ESC frees the cursor.   1–5 cycle palette."
+theme_override_font_sizes/font_size = 12
+theme_override_colors/font_color = Color(0.92, 0.88, 0.78, 1)
+theme_override_styles/normal = SubResource("LabelBg")
+
+[node name="PromptLabel" type="Label" parent="UI"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -260.0
+offset_top = -120.0
+offset_right = 260.0
+offset_bottom = -68.0
+horizontal_alignment = 1
+vertical_alignment = 1
+text = ""
+theme_override_font_sizes/font_size = 16
+theme_override_colors/font_color = Color(0.96, 0.92, 0.82, 1)
+theme_override_styles/normal = SubResource("LabelBg")

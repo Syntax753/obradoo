@@ -9,22 +9,22 @@ extends Control
 @onready var next_btn: Button = $Bottom/NextButton
 @onready var slider: HSlider = $Bottom/Slider
 @onready var conclude_btn: Button = $Top/ConcludeButton
-@onready var menu_btn: Button = $Top/MenuButton
+@onready var back_btn: Button = $Top/BackButton
 
 var _timeline: Dictionary = {}
 var _current_turn: int = 0
 var _inspected: String = ""
 
 func _ready() -> void:
-	var memory: Memory = GameState.current_memory()
+	var memory: Memory = GameState.active_memory()
 	if memory == null or memory.timeline_id == "":
-		GameState.return_to_menu()
+		GameState.return_to_world()
 		return
 	var script_path := "res://data/timelines/%s.gd" % memory.timeline_id
 	var script_res := load(script_path)
 	if script_res == null:
 		push_error("Timeline script not found: %s" % script_path)
-		GameState.return_to_menu()
+		GameState.return_to_world()
 		return
 	_timeline = script_res.new().build()
 	title_label.text = _timeline.title
@@ -38,10 +38,17 @@ func _ready() -> void:
 	slider.value_changed.connect(func(v): _show_turn(int(v)))
 	prev_btn.pressed.connect(func(): _show_turn(_current_turn - 1))
 	next_btn.pressed.connect(func(): _show_turn(_current_turn + 1))
-	conclude_btn.pressed.connect(GameState.conclude_current_memory)
-	menu_btn.pressed.connect(GameState.return_to_menu)
+	conclude_btn.pressed.connect(GameState.return_to_world)
+	back_btn.pressed.connect(GameState.return_to_world)
 
 	_show_turn(0)
+
+func _input(event: InputEvent) -> void:
+	# Tab is bound to ui_focus_next by default and would be consumed before
+	# _unhandled_input fires — handle it here so the casebook always opens.
+	if event is InputEventKey and event.pressed and not event.echo and event.keycode == KEY_TAB:
+		_open_casebook()
+		get_viewport().set_input_as_handled()
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed and not event.echo:
@@ -51,6 +58,19 @@ func _unhandled_input(event: InputEvent) -> void:
 		elif event.keycode == KEY_RIGHT:
 			_show_turn(_current_turn + 1)
 			get_viewport().set_input_as_handled()
+		elif event.keycode == KEY_ESCAPE:
+			GameState.return_to_world()
+			get_viewport().set_input_as_handled()
+
+func _open_casebook() -> void:
+	if has_node("Casebook"):
+		return
+	var scene := load("res://scenes/casebook/casebook.tscn") as PackedScene
+	if scene == null:
+		return
+	var inst := scene.instantiate()
+	inst.name = "Casebook"
+	add_child(inst)
 
 func _show_turn(idx: int) -> void:
 	var n: int = _timeline.turns.size()
@@ -59,7 +79,8 @@ func _show_turn(idx: int) -> void:
 	idx = clamp(idx, 0, n - 1)
 	_current_turn = idx
 	var turn: Dictionary = _timeline.turns[idx]
-	grid_view.show_turn(turn)
+	var prev: Dictionary = _timeline.turns[idx - 1] if idx > 0 else {}
+	grid_view.show_turn(turn, prev)
 	turn_label.text = "Turn %d / %d" % [idx + 1, n]
 	slider.set_value_no_signal(idx)
 	prev_btn.disabled = (idx == 0)
@@ -99,7 +120,9 @@ func _refresh_inspect(turn: Dictionary) -> void:
 	if st.has("action") and st.action != "":
 		lines.append("[color=#bcb29c]action:[/color]   %s" % st.action)
 	if st.has("holding") and st.holding != "":
-		lines.append("[color=#bcb29c]holding:[/color]   %s" % st.holding)
+		lines.append("[color=#bcb29c]holding:[/color]   %s" % GridView.held_label(st.holding))
+	if st.has("gesture") and st.gesture != "":
+		lines.append("[color=#bcb29c]gesture:[/color]   %s" % st.gesture)
 	if st.has("facing") and st.facing != "":
 		lines.append("[color=#bcb29c]facing:[/color]   %s" % st.facing)
 	if st.has("pos"):

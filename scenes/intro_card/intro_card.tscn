@@ -65,24 +65,12 @@ custom_minimum_size = Vector2(0, 18)
 custom_minimum_size = Vector2(0, 42)
 text = "Recall"
 
-[node name="MenuButton" type="Button" parent="."]
+[node name="BackButton" type="Button" parent="."]
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -120.0
+offset_left = -160.0
 offset_top = 16.0
 offset_right = -16.0
 offset_bottom = 48.0
-text = "Menu"
-
-[node name="CounterLabel" type="Label" parent="."]
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = 16.0
-offset_top = -36.0
-offset_right = 240.0
-offset_bottom = -16.0
-text = "Memory ? of ?"
-theme_override_font_sizes/font_size = 14
-theme_override_colors/font_color = Color(0.5, 0.46, 0.4, 1)
+text = "← Back to Manor"
