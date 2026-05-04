@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Memory" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://data/memory.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "arrival"
+order = 1
+title = "The Arrival"
+subtitle = "Ravensreach Manor — dusk, the evening of the storm"
+intro = "Five guests pass beneath the lintel as rain begins to drum the slate. The host greets each by name. The pocket-watch grows warm in your hand."
+scene_path = "res://scenes/memories/placeholder_memory.tscn"

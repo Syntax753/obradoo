@@ -1,0 +1,51 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scenes/main_menu/main_menu.gd" id="1"]
+
+[node name="MainMenu" type="Control"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource("1")
+
+[node name="Background" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0.07, 0.06, 0.05, 1)
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="VBox" type="VBoxContainer" parent="CenterContainer"]
+custom_minimum_size = Vector2(420, 0)
+theme_override_constants/separation = 14
+
+[node name="Title" type="Label" parent="CenterContainer/VBox"]
+text = "OBRADOO"
+horizontal_alignment = 1
+theme_override_font_sizes/font_size = 72
+theme_override_colors/font_color = Color(0.91, 0.86, 0.77, 1)
+
+[node name="Subtitle" type="Label" parent="CenterContainer/VBox"]
+text = "A Tale of Five at Ravensreach"
+horizontal_alignment = 1
+theme_override_font_sizes/font_size = 18
+theme_override_colors/font_color = Color(0.65, 0.6, 0.52, 1)
+
+[node name="Spacer" type="Control" parent="CenterContainer/VBox"]
+custom_minimum_size = Vector2(0, 40)
+
+[node name="NewGameButton" type="Button" parent="CenterContainer/VBox"]
+custom_minimum_size = Vector2(0, 44)
+text = "New Memoirs"
+
+[node name="ContinueButton" type="Button" parent="CenterContainer/VBox"]
+custom_minimum_size = Vector2(0, 44)
+text = "Continue"
+
+[node name="QuitButton" type="Button" parent="CenterContainer/VBox"]
+custom_minimum_size = Vector2(0, 44)
+text = "Depart"
